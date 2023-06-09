@@ -6,13 +6,12 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "categories")
 public class Category {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categorySequence")
     private Long id;
 
     @Column(length = 100, nullable = false)
-    @Size(min = 3, max = 100)
+    @Size(min =2, max = 100)
     private String name;
 
     @Column(length = 2000)

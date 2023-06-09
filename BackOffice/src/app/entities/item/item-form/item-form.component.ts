@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from '../../category/model/category.model';
 import { CategoryService } from '../../category/service/category.service';
-import { Item } from '../model/item.model';
+import { Item } from '../modelo/item.model';
 import { ItemService } from '../service/item.service';
 
 @Component({
@@ -17,145 +17,139 @@ export class ItemFormComponent implements OnInit {
   selectedCategory?: Category;
   categories: Category[] = [];
 
-  constructor(
-    private route: ActivatedRoute,
-    private itemService: ItemService,
-    private categoryService: CategoryService
-  ) { }
-
+  constructor(private route: ActivatedRoute,
+              private itemService: ItemService,
+              private categoryService: CategoryService
+              ){}
   ngOnInit(): void {
-    const entryParam: string = this.route.snapshot.paramMap.get("itemId") ?? "new";
 
-    if(entryParam !== "new") {
+    const entreParam: string = this.route.snapshot.paramMap.get("itemId") ?? "new";
+
+    if(entreParam !== "new"){
       this.itemId = +this.route.snapshot.paramMap.get("itemId")!;
       this.mode = "UPDATE";
       this.getItemById(this.itemId);
-    } else {
+    }else{
       this.mode = "NEW";
       this.initializeItem();
     }
-    //this.getAllCategories();
-  }
 
-  public getAllCategories(event?: any): void {
-    let  categorySearch: string | undefined;
-    if (event?.query) {
-      categorySearch = event.query
-    }
-    this.categoryService.getAllCategories(categorySearch).subscribe({
-      next: (categoriesFiltered) => { this.categories = categoriesFiltered },
-      error: (err) => { this.handleError(err) }
+  }
+  private getItemById(itemId: number){
+    this.itemService.getItemById(itemId).subscribe({
+      next: (itemRequest) =>{
+        this.item = itemRequest;
+        this.selectedCategory = new Category(itemRequest.categoryId!, itemRequest.categoryName!);
+      },
+      error: (err) => {this.handleError(err);}
     });
   }
 
-  public saveItem(): void {
-    if (this.mode == "NEW") {
+  private initializeItem(): void{
+    this.item = new Item(undefined, "", 0, false);
+  }
+
+  public saveItem():void{
+    if(this.mode == "NEW"){
       this.insertItem();
     }
 
-    if (this.mode == "UPDATE") {
+    if(this.mode == "UPDATE"){
       this.updateItem();
     }
   }
 
-  public categorySelected(): void {
+  private insertItem():void{
+    this.itemService.insertItem(this.item!).subscribe({
+      next: (itemInserted) => {
+        console.log("insertado correctamente");
+        console.log(itemInserted);
+      },
+      error: (err) => {this.handleError(err);}
+    });
+  }
+
+  private updateItem():void{
+    this.itemService.updatetItem(this.item!).subscribe({
+      next: (itemUpdate) => {
+      console.log("Actualizado correctamente");
+      console.log(itemUpdate);
+    },
+    error: (err) => {this.handleError(err);}
+  });
+  }
+
+  public getAllCategories(event?:any):void{
+    let categorySearch: string | undefined;
+    if(event?.query){
+      categorySearch = event.query;
+    }
+    this.categoryService.getAllCategories(categorySearch).subscribe({
+      next: (categoriesFiltered) => {this.categories = categoriesFiltered;},
+      error: (err) => {this.handleError(err);}
+    })
+  }
+
+  public categorySelected():void{
     this.item!.categoryId = this.selectedCategory!.id;
     this.item!.categoryName = this.selectedCategory!.name;
   }
 
-  public categoryUnselected(): void {
+  public categoryUnselected():void{
     this.item!.categoryId = undefined;
     this.item!.categoryName = undefined;
   }
 
-  public includeImageInItem(event: any): void {
+  public includeImageInItem(event: any): void{
     const inputFile = event.target as HTMLInputElement;
     const file: File | null = inputFile.files?.item(0) ?? null;
 
-    this.readAsString(file!).then(
+    this.readFileAsString(file!).then(
       (result) => {
         const imageType: string = this.getImageType(result);
         console.log(imageType);
         const imageBase64: string = this.getImageBase64(result);
         console.log(imageBase64);
-
         this.item!.image = imageBase64;
       },
       (error) => {
-        this.handleError(error);
+        console.log("No se pudo cargar el archivo");
       }
     )
   }
 
-  private getImageType(imageString: string): string {
-    const imageStringParts: string[] = imageString.split(",");
+  public getImageType(imageString: string): string{
+    const imageStringParts: string[] =imageString.split(",");
     if(imageStringParts.length == 2){
       return imageStringParts[0];
-    } else {
-      this.handleError("No es un fichero base64");
+    }else{
+      console.log("No es un fichero correcto.");
       return ""
     }
   }
-
-  private getImageBase64(imageString: string): string {
-    const imageStringParts: string[] = imageString.split(",");
+  public getImageBase64(imageString: string): string{
+    const imageStringParts: string[] =imageString.split(",");
     if(imageStringParts.length == 2){
       return imageStringParts[1];
-    } else {
-      this.handleError("No es un fichero base64");
-      return ""
+    }else{
+      console.log("No es un fichero correcto.");
+      return "";
     }
   }
 
-  private readAsString(file: File) {
-    return new Promise<string>(function(resolve, reject) {
+
+
+  private readFileAsString(file:File) {
+    return new Promise<string>(function(resolve, reject){
       let reader: FileReader = new FileReader();
-      reader.readAsDataURL(file)
-      reader.onload = function() {
+      reader.readAsDataURL(file);
+      reader.onload = function(){
         resolve(this.result as string)
       }
     })
   }
 
-  private insertItem(): void {
-    this.itemService.insert(this.item!).subscribe({
-      next: (itemInserted) => {
-        console.log("Insertado correctamente");
-        console.log(itemInserted);
-        //ToDo
-      },
-      error: (err) => { this.handleError(err); }
-    });
+  private handleError(err: any): void{
+    //Lo que queramos que vea el usuario un alert....
   }
-
-  private updateItem(): void {
-    this.itemService.update(this.item!).subscribe({
-      next: (itemUpdated) => {
-        console.log("Modificado correctamente");
-        console.log(itemUpdated);
-        //ToDo
-      },
-      error: (err) => { this.handleError(err); }
-    });
-  }
-
-  private getItemById(itemId: number) {
-    this.itemService.getItemById(itemId).subscribe({
-      next: (itemRequest) => {
-        this.item = itemRequest;
-        this.selectedCategory = new Category(itemRequest.categoryId!, itemRequest.categoryName!);
-      },
-      error: (err) => { this.handleError(err) }
-    });
-  }
-
-  private initializeItem(): void {
-    this.item = new Item(undefined, "", 0)
-  }
-
-  private handleError(err: any): void {
-    console.log(err);
-    //ToDo
-  }
-
 }

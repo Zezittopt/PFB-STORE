@@ -5,7 +5,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "items")
+@Table(name ="items")
 public class Item {
 
     @Id
@@ -26,7 +26,7 @@ public class Item {
     @Lob
     private byte[] image;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 

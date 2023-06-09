@@ -1,11 +1,10 @@
 package com.kreitek.store.application.service.impl;
 
-import com.kreitek.store.application.dto.ItemDto;
+import com.kreitek.store.application.dto.ItemDTO;
 import com.kreitek.store.application.mapper.ItemMapper;
 import com.kreitek.store.application.service.ItemService;
 import com.kreitek.store.domain.entity.Item;
-import com.kreitek.store.domain.persistence.ItemPersistence;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.kreitek.store.domain.persistance.ItemPersistance;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,46 +14,45 @@ import java.util.Optional;
 
 @Service
 public class ItemServiceImpl implements ItemService {
-    private final ItemPersistence persistence;
-    private final ItemMapper mapper;
+    private final ItemPersistance itemPersistance;
+    private final ItemMapper itemMapper;
 
-    @Autowired
-    public ItemServiceImpl(ItemPersistence persistence, ItemMapper mapper) {
-        this.persistence = persistence;
-        this.mapper = mapper;
+    public ItemServiceImpl(ItemPersistance itemPersistance, ItemMapper itemMapper) {
+        this.itemPersistance = itemPersistance;
+        this.itemMapper = itemMapper;
     }
 
     @Override
-    public List<ItemDto> getAllItems() {
-        List<Item> items = this.persistence.getAllItems();
-        return this.mapper.toDto(items);
+    public List<ItemDTO> getAllItems() {
+        List<Item> items = this.itemPersistance.getAllItems();
+        return this.itemMapper.toDto(items);
     }
 
     @Override
-    public List<ItemDto> getAllItemsByCategory(Long categoryId) {
-        List<Item> items = this.persistence.getAllItemsByCategory(categoryId);
-        return this.mapper.toDto(items);
+    public List<ItemDTO> getAllItemsByCategory(Long categoryId) {
+        List<Item> items = this.itemPersistance.getAllItemsByCategory(categoryId);
+        return this.itemMapper.toDto(items);
     }
 
     @Override
-    public Optional<ItemDto> getItemById(Long itemId) {
-        return this.persistence.getItemById(itemId).map(this.mapper::toDto);
+    public Optional<ItemDTO> getItemById(Long itemId) {
+        return this.itemPersistance.getItemById(itemId).map(itemMapper::toDto);
     }
 
     @Override
-    public ItemDto saveItem(ItemDto itemDto) {
-        Item itemSaved = this.persistence.saveItem(this.mapper.toEntity(itemDto));
-        return this.mapper.toDto(itemSaved);
+    public ItemDTO saveItem(ItemDTO itemDTO) {
+        Item itemSaved = this.itemPersistance.saveItem(this.itemMapper.toEntity(itemDTO));
+        return this.itemMapper.toDto(itemSaved);
     }
 
     @Override
     public void deleteItem(Long itemId) {
-        this.persistence.deleteItem(itemId);
+        this.itemPersistance.deleteItem(itemId);
     }
 
     @Override
-    public Page<ItemDto> getItemsByCriteriaStringPaged(Pageable pageable, String filter) {
-        Page<Item> itemPage = this.persistence.findAll(pageable, filter);
-        return itemPage.map(mapper::toDto);
+    public Page<ItemDTO> getItemByCriteriaStringPaged(Pageable pageable, String filter) {
+        Page<Item> itemPage = this.itemPersistance.findAll(pageable, filter);
+        return itemPage.map(itemMapper::toDto);
     }
 }

@@ -11,9 +11,7 @@ describe('CategoryFormComponent', () => {
       declarations: [ CategoryFormComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(CategoryFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

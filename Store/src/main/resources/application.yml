@@ -1,13 +1,9 @@
-main:
-  allow-circular-references: true
-
 server:
   servlet:
     context-path: /store
-
-spring:
+Spring:
   datasource:
-    url:  jdbc:h2:./store
+    url: jdbc:h2:./store
   jpa:
     hibernate:
       ddl-auto: update
@@ -16,6 +12,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  main:
+    allow-circular-references: true
   h2:
     console:
       enabled: true

@@ -11,9 +11,7 @@ describe('ItemFormComponent', () => {
       declarations: [ ItemFormComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(ItemFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

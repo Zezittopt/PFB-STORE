@@ -9,22 +9,22 @@ import { CategoryService } from '../service/category.service';
 })
 export class CategoryListComponent implements OnInit {
 
-  categories: Category[] = [];
+  categories: Category [] = [];
 
-  constructor(private categoryService: CategoryService) { }
+  constructor( private categoryService: CategoryService) {}
 
   ngOnInit(): void {
     this.getCategories();
   }
 
-  private getCategories(): void {
-    this.categoryService.getAllCategories().subscribe({
+  private getCategories(): void{
+    this.categoryService.getAllCategories().subscribe ({
       next: (categoriesRequest) => { this.categories = categoriesRequest; },
-      error: (err) => { this.hadleError(err); }
+      error: (err) => { this.handleError(err); }
     })
   }
-  
-  private hadleError(error: any) {
+
+  private handleError(error: any): void{
     console.log(error);
   }
 

@@ -1,6 +1,7 @@
 package com.kreitek.store.application.service;
 
-import com.kreitek.store.application.dto.ItemDto;
+import com.kreitek.store.application.dto.ItemDTO;
+import com.kreitek.store.domain.entity.Item;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -8,10 +9,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ItemService {
-    List<ItemDto> getAllItems();
-    List<ItemDto> getAllItemsByCategory(Long categoryId);
-    Optional<ItemDto> getItemById(Long itemId);
-    ItemDto saveItem(ItemDto itemDto);
+    List<ItemDTO> getAllItems();
+    List<ItemDTO> getAllItemsByCategory(Long categoryId);
+    Optional<ItemDTO> getItemById(Long itemId);
+    ItemDTO saveItem(ItemDTO item);
     void deleteItem(Long itemId);
-    Page<ItemDto> getItemsByCriteriaStringPaged(Pageable pageable, String filter);
+    Page<ItemDTO> getItemByCriteriaStringPaged(Pageable pageable, String filter);
 }

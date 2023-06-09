@@ -1,8 +1,10 @@
 package com.kreitek.store.application.dto;
 
+
 import java.io.Serializable;
 
-public class ItemDto implements Serializable {
+public class ItemDTO implements Serializable {
+
     private Long id;
     private String name;
     private String description;
@@ -11,7 +13,7 @@ public class ItemDto implements Serializable {
     private Long categoryId;
     private String categoryName;
 
-    public ItemDto() {
+    public ItemDTO() {
     }
 
     public Long getId() {

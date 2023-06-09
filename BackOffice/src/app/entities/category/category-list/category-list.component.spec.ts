@@ -11,9 +11,7 @@ describe('CategoryListComponent', () => {
       declarations: [ CategoryListComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(CategoryListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

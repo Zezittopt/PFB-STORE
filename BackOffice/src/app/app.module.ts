@@ -1,51 +1,61 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { NavbarComponent } from './layout/navbar/navbar.component';
-import { FooterComponent } from './layout/footer/footer.component';
+import { NavbarComponent } from './layouts/navbar/navbar.component';
+import { FooterComponent } from './layouts/footer/footer.component';
 import { CategoryListComponent } from './entities/category/category-list/category-list.component';
 import { CategoryFormComponent } from './entities/category/category-form/category-form.component';
 import { ItemListComponent } from './entities/item/item-list/item-list.component';
 import { ItemFormComponent } from './entities/item/item-form/item-form.component';
-import { HttpRequestIntercept } from './config/interceptors/http.request-interceptor.interceptor';
+import { HeaderComponent } from './layouts/header/header.component';
 
-import {AutoCompleteModule} from 'primeng/autocomplete';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HttpRequestIntercept } from './config/interceptors/http-request-interceptor.interceptor';
+
+//Modulos de terceros
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ItemReactiveFormComponent } from './entities/item/item-reactive-form/item-reactive-form.component';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     NavbarComponent,
     FooterComponent,
+    HeaderComponent,
     CategoryListComponent,
     CategoryFormComponent,
     ItemListComponent,
     ItemFormComponent,
-    ItemReactiveFormComponent
+    ItemReactiveFormComponent,
+    FooterComponent,
+    FooterComponent
+
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     AutoCompleteModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule
+    DashboardModule
+
+
   ],
   providers: [
-    { 
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpRequestIntercept,
       multi: true
-     }
+    }
   ],
   bootstrap: [AppComponent]
 })

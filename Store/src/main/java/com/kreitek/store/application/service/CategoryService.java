@@ -1,15 +1,15 @@
 package com.kreitek.store.application.service;
 
-import com.kreitek.store.application.dto.CategoryDto;
+import com.kreitek.store.application.dto.CategoryDTO;
+import com.kreitek.store.domain.entity.Category;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface CategoryService {
-    List<CategoryDto> getAllCategories();
-    Optional<CategoryDto> getCategoryById(Long categoryId);
-    CategoryDto saveCategory(CategoryDto categoryDto);
+    List<CategoryDTO> getAllCategories();
+    Optional<CategoryDTO> getCategoryById(Long categoryId);
+    CategoryDTO saveCategory(CategoryDTO categoryDTO);
     void deleteCategory(Long categoryId);
-
-    List<CategoryDto> getAllCategoriesByName(String partialName);
+    List<CategoryDTO> getAllCategoriesByName(String partialName);
 }

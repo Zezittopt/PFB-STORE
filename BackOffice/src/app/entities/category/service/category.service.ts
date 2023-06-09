@@ -8,14 +8,15 @@ import { Category } from '../model/category.model';
 })
 export class CategoryService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private httpClient: HttpClient   ) { }
 
-  public getAllCategories(partialName?: string | undefined): Observable<Category[]> {
+  public getAllCategories(partialName?: string): Observable<Category[]>{
+
     let urlEndpoint: string = "http://localhost:8080/store/categories";
-    if (partialName) {
+    if(partialName){
       urlEndpoint = urlEndpoint + "?partialName=" + partialName;
     }
-    return this.http.get<Category[]>(urlEndpoint);
-  }
+    return this.httpClient.get<Category[]>(urlEndpoint);
 
+  }
 }
