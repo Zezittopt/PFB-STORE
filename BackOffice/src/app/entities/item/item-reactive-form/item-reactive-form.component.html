@@ -46,11 +46,6 @@
         <label for="precio">Precio</label>
         <input type="number" class="form-control" id="precio" formControlName="price">
     </div>
-    <div class="form-group">
-        <label for="reduced">Oferta</label>
-        <input type="number" class="form-control" id="reduced" formControlName="reduced">
-    </div>
-
 
     <!-- Validación price -->
     <div *ngIf="itemForm.get('price')!.errors && itemForm.get('price')!.errors">
@@ -63,6 +58,20 @@
         </small>
 
     </div>
+
+       <!-- Oferta -->
+    <div class="form-group">
+        <label for="reduced">Oferta</label>
+        <input type="number" class="form-control" id="reduced" formControlName="reduced">
+   </div>
+
+      <!-- Validación oferta -->
+      <div *ngIf="itemForm.get('reduced')!.errors && itemForm.get('reduced')!.errors">
+        <small class="form-text text-danger"  *ngIf="itemForm.get('reduced')!.errors!['min']">
+          El valor debe ser positivo
+          </small>
+       </div>
+
 
     <!-- Imagen -->
     <div class="form-group" >
