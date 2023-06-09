@@ -1,15 +1,25 @@
 package com.kreitek.store.infraestructure.rest;
 
-import com.kreitek.store.application.dto.ItemDTO;
-import com.kreitek.store.application.service.ItemService;
-import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.data.domain.Pageable;
-
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.kreitek.store.application.dto.ItemDTO;
+import com.kreitek.store.application.dto.ItemShopDTO;
+import com.kreitek.store.application.service.ItemService;
 
 @RestController
 public class ItemRestController {
@@ -28,8 +38,8 @@ public class ItemRestController {
     }
     @CrossOrigin
     @GetMapping(value = "/categories/{idCategory}/items", produces = "application/json")
-    ResponseEntity<List<ItemDTO>> getAllItemsFromCategory(@PathVariable Long idCategory){
-        List<ItemDTO> items = this.itemService.getAllItemsByCategory(idCategory);
+    ResponseEntity<List<ItemShopDTO>> getAllItemsFromCategory(@PathVariable Long idCategory){
+        List<ItemShopDTO> items = this.itemService.getAllItemsByCategory(idCategory);
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
 

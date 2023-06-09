@@ -1,8 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
-import { IUser } from '../interface/user.interface';
+import { Observable } from 'rxjs';
 import { ILoginUser } from '../interface/loginUser.interface';
+import { IUser } from '../interface/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -20,24 +20,15 @@ export class UserService {
 
   public insertUser(user: IUser): Observable<IUser>{ return this.httpCliente.post<IUser>(this.url, user); }
   public logintUser(creds: ILoginUser){ return this.httpCliente.post<IUser>(this.urlLogin, creds); }
-  /*public logintUser(creds: ILoginUser){
-    return this.httpCliente.post(this.url, creds, {
-      observe: 'response'
-    }).pipe(map((response: HttpResponse<any>) => {
-      const body = response.body;
-      const headers = response.headers;
-
-      const bearerToken = headers.get('Authorization')!;
-      const token = bearerToken.replace('Bearer ', '');
-
-      localStorage.setItem('token', token);
-
-      return body;
-    }))
-  }*/
-
-  public getToken() {
-    return localStorage.getItem('token');
+  public insertFavoriteByUserNameAndItemId(userName: string, itemId: number) {
+    let urlFavorite: string = "http://localhost:8080/store/users/" + userName + "/favorites/" + itemId;
+    return this.httpCliente.put(urlFavorite, null); }
+  public removeFavoriteByUserNameAndItemId(userName: string, itemId: number) {
+    let urlFavorite: string = "http://localhost:8080/store/users/" + userName + "/favorites/remove/" + itemId;
+    return this.httpCliente.delete(urlFavorite);
   }
+  public getAllFavoritesByUserName(username: string): Observable<number[]> {
+    let urlFavorite: string = "http://localhost:8080/store/users/" + username + "/favorites";
+    return this.httpCliente.get<number[]>(urlFavorite);  }
 
 }

@@ -1,14 +1,21 @@
 package com.kreitek.store.infraestructure.rest;
 
-import com.kreitek.store.application.dto.ItemDTO;
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.kreitek.store.application.dto.LoginDTO;
 import com.kreitek.store.application.dto.UserDTO;
 import com.kreitek.store.application.service.UserService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class UserRestController {
@@ -17,6 +24,13 @@ public class UserRestController {
 
     public UserRestController(UserService userService) {
         this.userService = userService;
+    }
+
+    @CrossOrigin
+    @GetMapping(value="/users/{userName}/favorites")
+    public ResponseEntity<List<Long>> getFavoritesByUserName(@PathVariable String userName){
+        List<Long> favoritesList = this.userService.getFavoritesByUserName(userName);
+        return new ResponseEntity<>(favoritesList, HttpStatus.OK);
     }
 
     @CrossOrigin
@@ -57,8 +71,8 @@ public class UserRestController {
     }
 
     @CrossOrigin
-    @PutMapping(value= "/users/{userName}/favorites/{itemId}", produces = "application/json", consumes = "application/json")
-    public ResponseEntity<List<ItemDTO>> insertItemsInUsers(@PathVariable Long itemId, @PathVariable String userName){
+    @PutMapping(value= "/users/{userName}/favorites/{itemId}")
+    public ResponseEntity<List<Long>> insertItemsInUsers(@PathVariable Long itemId, @PathVariable String userName){
        boolean insertOk = userService.insertFavoriteByUserIdAndByItemid(userName, itemId);
        if(insertOk){
            return new ResponseEntity<>(HttpStatus.OK);
@@ -78,10 +92,5 @@ public class UserRestController {
         }
     }
 
-    @CrossOrigin
-    @GetMapping(value="/users/{userName}/favorites")
-    public ResponseEntity<List<Long>> getFavoritesByUserName(@PathVariable String username){
-        List<Long> favoritesList = this.userService.getFavoritesByUserName(username);
-        return new ResponseEntity<>(favoritesList, HttpStatus.OK);
-    }
+    
 }

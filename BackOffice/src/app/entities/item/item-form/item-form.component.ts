@@ -45,7 +45,7 @@ export class ItemFormComponent implements OnInit {
   }
 
   private initializeItem(): void{
-    this.item = new Item(undefined, "", 0);
+    this.item = new Item("", 0);
   }
 
   public saveItem():void{

@@ -1,23 +1,27 @@
 package com.kreitek.store.application.service.impl;
 
-import com.kreitek.store.application.dto.ItemDTO;
-import com.kreitek.store.application.mapper.ItemMapper;
-import com.kreitek.store.application.service.ItemService;
-import com.kreitek.store.domain.entity.Item;
-import com.kreitek.store.domain.persistance.ItemPersistance;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import com.kreitek.store.application.dto.ItemDTO;
+import com.kreitek.store.application.dto.ItemShopDTO;
+import com.kreitek.store.application.mapper.ItemMapper;
+import com.kreitek.store.application.mapper.ItemShopMapper;
+import com.kreitek.store.application.service.ItemService;
+import com.kreitek.store.domain.entity.Item;
+import com.kreitek.store.domain.persistance.ItemPersistance;
 
 @Service
 public class ItemServiceImpl implements ItemService {
     private final ItemPersistance itemPersistance;
     private final ItemMapper itemMapper;
+    private final ItemShopMapper itemShopMapper;
 
-    public ItemServiceImpl(ItemPersistance itemPersistance, ItemMapper itemMapper) {
+    public ItemServiceImpl(ItemPersistance itemPersistance, ItemMapper itemMapper, ItemShopMapper itemShopMapper) {
         this.itemPersistance = itemPersistance;
         this.itemMapper = itemMapper;
     }
@@ -29,9 +33,9 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDTO> getAllItemsByCategory(Long categoryId) {
+    public List<ItemShopDTO> getAllItemsByCategory(Long categoryId) {
         List<Item> items = this.itemPersistance.getAllItemsByCategory(categoryId);
-        return this.itemMapper.toDto(items);
+        return this.itemShopMapper.toDto(items);
     }
 
     @Override

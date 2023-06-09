@@ -27,7 +27,7 @@ export class ItemService {
   }
 
   public getAllItemsByCategoryId(categoryId: number): Observable<IItemShop[]>{
-    let urlShopCoats : string =  this.urlShop + categoryId + "/items";
+    let urlShopCoats : string =  "http://localhost:8080/store/categories/" + categoryId + "/items";
     return this.httpClient.get<IItemShop[]>(urlShopCoats);
   }
 
