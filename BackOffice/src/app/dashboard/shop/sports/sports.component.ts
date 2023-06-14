@@ -36,7 +36,8 @@ export class SportsComponent implements OnInit {
     this.itemService.getAllItemsByCategoryId(this.categoryId).subscribe({
       next: (articlesRequest) => {
         articlesRequest.forEach( (article) =>{
-          const articleNew: ItemShop = new ItemShop(article.id, article.name, article.price, article.reduced, article.image, article.favorite);          this.articleList.push(articleNew);
+          const articleNew: ItemShop = new ItemShop(article.id, article.name, article.price, article.reduced, article.image, article.favorite);          
+          this.articleList.push(articleNew);
         })
       },
       error: (err) => {this.handleError(err);}

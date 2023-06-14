@@ -15,7 +15,6 @@
     <p-autoComplete [(ngModel)]="selectedCategory" name="selectedCategory" [suggestions]="categories" (completeMethod)="getAllCategories($event)"
     field="name" (onSelect)="categorySelected();" (onclear)="categoryUnselected();" [required]="true" [forceSelection]="true" ></p-autoComplete>
   </div>
-
   <!-- Name: -->
   <div class="form-group">
     <label for="name">Nombre</label>

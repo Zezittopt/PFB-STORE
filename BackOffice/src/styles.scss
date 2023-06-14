@@ -1,34 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
 $font-family_1: 'Montserrat', sans-serif;
-$color_1: rgb(255, 69, 100);
-$color_2: rgba(0, 0, 0, 0.35);
+$color_1: gold;
+$color_2: green;
 $color_3: white;
-$color_4: wheat;
-$color_5: #c9c9c9;
-$color_6: red;
+$color_4: orange;
+$color_5: grey;
+$color_6: blue;
 $background-color_1: white;
-$background-color_2: rgb(207, 203, 203);
-$background-color_3: black;
-$background-color_4: rgb(255, 69, 100);
-$background-color_5: rgb(212, 208, 208);
-$background-color_6: rgb(155, 152, 152);
-$background-color_7: rgb(197, 180, 180);
-$background-color_8: rgb(187, 26, 53);
+$background-color_2: yellow;
+$background-color_3: green;
+$background-color_4: gold;
+$background-color_5: purple;
+$background-color_6: grey;
+$background-color_7: orange;
+$background-color_8: blue;
 
 * {
 	box-sizing: border-box;
 }
 body {
-	padding: 15px;
+	padding: 20px;
 	font-family: $font-family_1;
 }
 .body {
-	background-color: $background-color_2;
+	background-color: black;
 }
 .content {
 	width: 70%;
 	margin: 0 auto;
-	background-color: $background-color_1;
+	background-color: white;
 }
 
 
@@ -36,10 +36,10 @@ body {
 @import 'bootstrap/scss/bootstrap';
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: 'Eras Light ITC', sans-serif; }
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: 'Eras Light ITC', sans-serif; }

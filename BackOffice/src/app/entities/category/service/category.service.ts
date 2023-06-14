@@ -12,7 +12,7 @@ export class CategoryService {
 
   public getAllCategories(partialName?: string): Observable<Category[]>{
 
-    let urlEndpoint: string = "http://localhost:8080/store/categories";
+    let urlEndpoint: string = "http://localhost:4200/store/categories";
     if(partialName){
       urlEndpoint = urlEndpoint + "?partialName=" + partialName;
     }

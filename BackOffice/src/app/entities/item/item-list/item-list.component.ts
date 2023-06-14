@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ItemService } from '../service/item.service';
 import { Item } from '../modelo/item.model';
+import { ItemService } from '../service/item.service';
 
 @Component({
   selector: 'app-item-list',
@@ -38,7 +38,7 @@ export class ItemListComponent implements OnInit{
       this.title = "Artículos de la categoría "+ this.categoryId;
 
     }else{
-      this.title = "Lista de artículos";
+      this.title = "Artículos";
     }
     this.getAllItems();
   }
@@ -60,7 +60,7 @@ export class ItemListComponent implements OnInit{
 
 
   private handleError(error: any): void{
-    //Lo que queramos que haga por ejemplo mostrar un alert al usuario
+    
   }
 
   public nextPage():void{

@@ -6,7 +6,7 @@ div.cuerpo-categorias {
 }
 .title-banner {
 	color: white;
-	text-align: center;
+	text-align: left;
 	margin-top: 5px;
 	padding: 10px;
 	font-size: 2em;
@@ -49,7 +49,7 @@ p.card-text {
 	a {
 		color: white;
     text-decoration: none;
-    text-align: center;
+    text-align: left;
 		&:hover {
 			color: $color_4;
 			text-decoration: none;

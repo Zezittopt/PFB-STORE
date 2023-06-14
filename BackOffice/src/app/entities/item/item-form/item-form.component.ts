@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../../category/model/category.model';
 import { CategoryService } from '../../category/service/category.service';
 import { Item } from '../modelo/item.model';
+import { ItemService } from '../service/item.service';
 
 @Component({
   selector: 'app-item-form',
@@ -18,6 +19,7 @@ export class ItemFormComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
                   private router: Router,
+                  private itemService: ItemService,
                   private categoryService: CategoryService
               ){}
   ngOnInit(): void {

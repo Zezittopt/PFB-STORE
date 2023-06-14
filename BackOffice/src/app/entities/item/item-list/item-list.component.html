@@ -10,12 +10,12 @@
 
             <!-- Name -->
             <div class="form-group" class="col-12 col-md-6">
-                <label for="name">Nombre</label>
+                <label for="name">Artículo</label>
                 <input type="text" [(ngModel)]="nameFilter" name="name">
             </div>
 
             <div class="form-group" class="col-12 col-md-3">
-                <label for="price">Precio máximo</label>
+                <label for="price">Precio</label>
                 <input type="number" [(ngModel)]="priceFilter" name="price">
             </div>
 
@@ -26,9 +26,11 @@
             <!-- Price -->
 
         </div>
-        <div id="buttonCreateContainer">
-          <button [routerLink]="['/items','new']" class="btnNew">Nuevo artículo</button>
-      </div>
+
+        <!-- <div id="buttonCreateContainer">
+          <button [routerLink]="['/items','new']" class="btnNew">Crear nuevo artículo</button>
+      </div> -->
+        
     </form>
 </div>
 

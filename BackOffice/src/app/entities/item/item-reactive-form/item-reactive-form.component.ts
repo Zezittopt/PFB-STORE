@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Category } from '../../category/model/category.model';
 import { CategoryService } from '../../category/service/category.service';
 import { Item } from '../modelo/item.model';
 import { ItemService } from '../service/item.service';
